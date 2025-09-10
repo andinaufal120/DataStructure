@@ -1,6 +1,29 @@
 package doubly;
 
-public class LinkedList {
+public class LinkedList<E> {
+    private int size;
+    private Node<E> first;
+    private Node<E> last;
+
+    /// Constructs an empty list.
+    public LinkedList() {
+    }
+
+    /// Checks if the list is empty.
+    ///
+    /// @return true if the list contains no elements, false otherwise
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /// Returns the number of elements in the list.
+    ///
+    /// @return the size of the list
+    public int size() {
+        return size;
+    }
+
+
     /// Represents a node in a doubly linked list.
     ///
     /// @param <E>
