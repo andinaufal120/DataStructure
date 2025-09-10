@@ -1,4 +1,4 @@
-import oneway.LinkedList;
+import singly.LinkedList;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package oneway;
+package singly;
 
 import java.util.NoSuchElementException;
 
