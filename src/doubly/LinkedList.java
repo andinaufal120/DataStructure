@@ -1,7 +1,7 @@
 package doubly;
 
 public class LinkedList {
-    /// Represents a node in a one-way linked list.
+    /// Represents a node in a doubly linked list.
     ///
     /// @param <E>
     private static class Node<E> {
