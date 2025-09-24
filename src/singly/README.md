@@ -51,15 +51,15 @@ size = 3
 |-----------|--------|-----------------|-------------|
 | **Add to end** | `add(value)` | O(n) | Adds element to the end of the list |
 | **Insert at index** | `insert(value, index)` | O(n) | Inserts element at specified position |
-| **Get first** | `getFirst()` | O(1) | Returns the first element |
-| **Get last** | `getLast()` | O(n) | Returns the last element |
-| **Get by index** | `get(index)` | O(n) | Returns element at specified index |
-| **Remove first** | `removeFirst()` | O(1) | Removes the first element |
-| **Remove last** | `removeLast()` | O(n) | Removes the last element |
-| **Remove by index** | `remove(index)` | O(n) | Removes element at specified index |
-| **Swap elements** | `swap(index1, index2)` | O(n) | Swaps two elements at given indices |
+| **Get first** | `getFirst()` | O(1) | Returns the first node |
+| **Get last** | `getLast()` | O(n) | Returns the last node |
+| **Get by index** | `get(index)` | O(n) | Returns node at specified index |
+| **Remove first** | `removeFirst()` | O(1) | Removes and returns the first node |
+| **Remove last** | `removeLast()` | O(n) | Removes and returns the last node |
+| **Remove by index** | `remove(index)` | O(n) | Removes and returns node at specified index |
+| **Swap elements** | `swap(index1, index2)` | O(n) | Swaps two nodes at given indices |
 | **Check empty** | `isEmpty()` | O(1) | Returns true if list is empty |
-| **Get size** | `getSize()` | O(1) | Returns the number of elements |
+| **Get size** | `getSize()` or `size()` | O(1) | Returns the number of elements |
 
 ### Operation Examples
 
@@ -114,10 +114,10 @@ list.add(3);        // [1] → [2] → [3]
 // Insert at specific position
 list.insert(0, 0);  // [0] → [1] → [2] → [3]
 
-// Access elements
-int first = list.getFirst();  // 0
-int last = list.getLast();    // 3
-int second = list.get(1);     // 1
+// Access elements (returns Node objects)
+int first = list.getFirst().getValue();  // 0
+int last = list.getLast().getValue();    // 3
+int second = list.get(1).getValue();     // 1
 
 // Modify list
 list.swap(0, 3);     // [3] → [1] → [2] → [0]
