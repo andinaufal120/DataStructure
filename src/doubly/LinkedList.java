@@ -27,7 +27,7 @@ public class LinkedList<E> {
     /// Represents a node in a doubly linked list.
     ///
     /// @param <E>
-    private static class Node<E> {
+    public static class Node<E> {
         private final E value;
         private Node<E> next;
         private Node<E> prev;
