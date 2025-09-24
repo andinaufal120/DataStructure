@@ -59,20 +59,20 @@ public class LinkedList<E> {
         size++;
     }
 
-    /// Returns the value of the first element.
+    /// Returns the first node.
     ///
-    /// @return the value of the first element in the list
-    public E getFirst() {
+    /// @return the first node in the list
+    public Node<E> getFirst() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         }
-        return first.getValue();
+        return first;
     }
 
-    /// Traverses to the last element and returns the value.
+    /// Traverses to the last element and returns the node.
     ///
-    /// @return the value of the last element in the list
-    public E getLast() {
+    /// @return the last node in the list
+    public Node<E> getLast() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         }
@@ -80,14 +80,14 @@ public class LinkedList<E> {
         while (current.getNext() != null) {
             current = current.getNext();
         }
-        return current.getValue();
+        return current;
     }
 
-    /// Returns the value at the specified index.
+    /// Returns the node at the specified index.
     ///
     /// @param index index to be searched
-    /// @return the requested value
-    public E get(int index) {
+    /// @return the requested node
+    public Node<E> get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -95,48 +95,59 @@ public class LinkedList<E> {
         for (int i = 0; i < index; i++) {
             current = current.getNext();
         }
-        return current.getValue();
+        return current;
     }
 
     /// Remove the first element of the list.
-    public void removeFirst() {
+    public Node<E> removeFirst() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         }
+        Node<E> removed = first;
         first = first.getNext();
         size--;
+        return removed;
     }
 
     /// Remove the last element of the list.
-    public void removeLast() {
+    public Node<E> removeLast() {
         if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
+        }
+        if (size == 1) {
+            Node<E> removed = first;
+            first = null;
+            size--;
+            return removed;
         }
         Node<E> current = first;
         for (int i = 0; i < size - 2; i++) {
             current = current.getNext();
         }
+        Node<E> removed = current.getNext();
         current.setNext(null);
         size--;
+        return removed;
     }
 
-    /// Removes an element at the specified index.
-    /// 
+    /// Removes an element at the specified index and returns the removed node.
+    ///
     /// @param index the index to be removed from the list
-    public void remove(int index) {
+    public Node<E> remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         if (index == 0) {
-            removeFirst();
-            return;
+            return removeFirst();
         }
-        Node<E> current = first;
+        Node<E> prev = first;
         for (int i = 0; i < index - 1; i++) {
-            current = current.getNext();
+            prev = prev.getNext();
         }
-        current.setNext(current.getNext().getNext());
+        Node<E> removed = prev.getNext();
+        prev.setNext(removed.getNext());
         size--;
+        return removed;
     }
     
     /// Swaps the positions of two elements in the linked list located at the specified indices.
@@ -195,7 +206,7 @@ public class LinkedList<E> {
     ///
     /// @return true if the list contains no elements, false otherwise.
     public boolean isEmpty() {
-        return first == null;
+        return size == 0;
     }
 
     /// Returns the size/length of the list.
@@ -205,11 +216,18 @@ public class LinkedList<E> {
         return size;
     }
 
+    /// Returns the number of elements in the list.
+    ///
+    /// @return the size of the list
+    public int size() {
+        return size;
+    }
+
 
     /// Represents a node in a one-way linked list.
     ///
     /// @param <E>
-    private static class Node<E> {
+    public static class Node<E> {
         private final E value;
         private Node<E> next;
 
