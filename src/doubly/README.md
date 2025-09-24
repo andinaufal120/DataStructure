@@ -1,6 +1,6 @@
 # Doubly Linked List Implementation
 
-This package contains a basic implementation framework for a **Doubly Linked List** data structure in Java. A doubly linked list is a linear data structure where each element (node) contains data and references (links) to both the next and previous nodes in the sequence.
+This package contains a complete implementation of a **Doubly Linked List** data structure in Java. A doubly linked list is a linear data structure where each element (node) contains data and references (links) to both the next and previous nodes in the sequence.
 
 ## Structure Overview
 
@@ -63,10 +63,19 @@ size = 3
 
 ## Implementation Status
 
-### Currently Implemented
+### Fully Implemented Operations
 | Method | Description | Time Complexity |
 |--------|-------------|-----------------|
 | `LinkedList()` | Constructor - creates empty list | O(1) |
+| `add(value)` | Adds element to the end of the list | O(1) |
+| `insert(value, index)` | Inserts element at specified position | O(n) |
+| `getFirst()` | Returns the first node | O(1) |
+| `getLast()` | Returns the last node | O(1) |
+| `get(index)` | Returns node at specified index | O(n) |
+| `removeFirst()` | Removes and returns the first node | O(1) |
+| `removeLast()` | Removes and returns the last node | O(1) |
+| `remove(index)` | Removes and returns node at specified index | O(n) |
+| `swap(index1, index2)` | Swaps two nodes at given indices | O(n) |
 | `isEmpty()` | Checks if the list is empty | O(1) |
 | `size()` | Returns the number of elements | O(1) |
 
@@ -76,9 +85,9 @@ The `Node<E>` inner class includes:
 - **Bidirectional references**: Both next and prev pointers
 - **Complete getter/setter methods**: For all node properties
 
-## Potential Operations (Framework Ready)
+## Operations and Time Complexity
 
-The current Node structure supports implementing these operations:
+The current implementation supports all basic doubly linked list operations:
 
 ### Basic Operations
 | Operation | Expected Time Complexity | Description |
@@ -101,8 +110,44 @@ The current Node structure supports implementing these operations:
 | **Bidirectional traversal** | O(n) | Traverse forward or backward |
 | **Insert before/after** | O(1)* | Insert relative to given node |
 | **Merge lists** | O(1) | Combine two doubly linked lists |
+| **Swap elements** | O(n) | Swap two nodes at given indices |
 
 *O(1) if you have reference to the node, O(n) if searching by value
+
+## Usage Example
+
+```java
+import doubly.LinkedList;
+
+// Create a new list
+LinkedList<String> list = new LinkedList<>();
+
+// Add elements
+list.add("First");    // [First]
+list.add("Second");   // [First] ⇄ [Second]
+list.add("Third");    // [First] ⇄ [Second] ⇄ [Third]
+
+// Insert at specific position
+list.insert("Zero", 0);  // [Zero] ⇄ [First] ⇄ [Second] ⇄ [Third]
+
+// Access elements (returns Node objects)
+String first = list.getFirst().getValue();  // "Zero"
+String last = list.getLast().getValue();    // "Third"
+String second = list.get(1).getValue();     // "First"
+
+// Bidirectional access advantages
+// - Fast access to both ends
+// - Efficient removal from known positions
+
+// Modify list
+list.swap(0, 3);        // [Third] ⇄ [First] ⇄ [Second] ⇄ [Zero]
+list.removeFirst();     // [First] ⇄ [Second] ⇄ [Zero]
+list.removeLast();      // [First] ⇄ [Second]
+
+// Check status
+boolean empty = list.isEmpty();  // false
+int size = list.size();          // 2
+```
 
 ## Node Implementation Details
 
@@ -141,38 +186,6 @@ Creates a node with all three components initialized.
 - **Slower cache performance**: More memory accesses per node
 - **Higher complexity**: More prone to implementation errors
 
-## Implementation Example Framework
-
-Here's how operations could be implemented:
-
-### Adding to Front (Pseudo-code)
-```java
-public void addFirst(E value) {
-    Node<E> newNode = new Node<>(value, first, null);
-    if (isEmpty()) {
-        first = last = newNode;
-    } else {
-        first.setPrev(newNode);
-        first = newNode;
-    }
-    size++;
-}
-```
-
-### Adding to Back (Pseudo-code)
-```java
-public void addLast(E value) {
-    Node<E> newNode = new Node<>(value, null, last);
-    if (isEmpty()) {
-        first = last = newNode;
-    } else {
-        last.setNext(newNode);
-        last = newNode;
-    }
-    size++;
-}
-```
-
 ## Common Use Cases
 
 - **Browser history**: Back and forward navigation
@@ -181,15 +194,4 @@ public void addLast(E value) {
 - **LRU Cache**: Efficient insertion and deletion
 - **Text editors**: Cursor movement and text manipulation
 - **Game development**: Player movement in both directions
-
-## Future Implementation Recommendations
-
-To complete this doubly linked list implementation, consider adding:
-
-1. **Core CRUD operations**: add, remove, get methods
-2. **Iterator support**: For enhanced for-loop compatibility
-3. **Bulk operations**: addAll, removeAll, clear methods
-4. **Utility methods**: contains, indexOf, toString
-5. **Error handling**: Proper exception throwing for edge cases
-
-The current Node structure provides a solid foundation for implementing all these features efficiently.
+- **Navigation systems**: Bidirectional traversal of routes or menus
